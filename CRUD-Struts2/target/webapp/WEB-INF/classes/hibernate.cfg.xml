@@ -1,0 +1,26 @@
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.password">yourpassword</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/yourdb</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.default_schema">yourschema</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+
+		<!-- INICIO Hibernate Connection para nao morrer a conexao -->
+		<property name="connection.autoReconnect">true</property>
+		<property name="connection.autoReconnectForPools">true</property>
+		<property name="connection.is-connection-validation-required">true</property>
+		<!-- TESTE NOVAS CONFIGURACOES P/ N CAIR CONEX -->
+		<property name="idleConnectionTestPeriod">25200</property>
+		<property name="testConnectionOnCheckin">true</property>
+		<!-- FIM Hibernate Connection para nao morrer a conexao -->
+
+		<mapping class="org.example.model.Usuario" />
+
+
+	</session-factory>
+</hibernate-configuration>

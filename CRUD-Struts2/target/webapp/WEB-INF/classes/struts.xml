@@ -1,0 +1,71 @@
+
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- Dev Mode TRUE ; desabilitar quando em producao -->
+	<constant name="struts.devMode" value="true" />
+
+	<package name="untitled" extends="struts-default">
+
+		<!-- Inicio Filters -->
+		<interceptors>
+			<!--  declarando classe para ser executada antes das Actions -->
+			<interceptor name="authentication"
+				class="org.example.interceptor.ValidaLogin" />
+
+			<!-- Declarando ordem de execucao da pilha -->
+			<interceptor-stack name="interceptor">
+				<interceptor-ref name="authentication" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<!--  o default eh usar a pilha de ordenacao interceptor que primeiro autentica e depois segue o defaultStack -->
+		<default-interceptor-ref name="interceptor" />
+
+
+		<!-- Global Results -->
+		<global-results>
+			<!--  redireciona quando expira sessao para fazer login na pagina principal index.jsp -->
+			<result name="Expirada" type="redirectAction">index</result>
+		</global-results>
+
+		<!-- Inicio Actions -->
+<!--		<action name="index">-->
+<!--			<result>/index.jsp</result>-->
+<!--			<interceptor-ref name="defaultStack"></interceptor-ref>-->
+<!--		</action>-->
+
+<!--		&lt;!&ndash;  Hello World! http://localhost/portaria/hello para testar &ndash;&gt;-->
+<!--		<action name="hello" class="org.example.controller.HelloAction">-->
+<!--			<result name="success">hello.jsp</result>-->
+<!--			<interceptor-ref name="defaultStack"></interceptor-ref>-->
+<!--		</action>-->
+
+<!--		<action name="login" class="org.example.controller.LoginAction"-->
+<!--			method="login">-->
+<!--			&lt;!&ndash;  Tem que ser defaultStack se nao ele roda de novo pra autorizacao e fica loop na pagina &ndash;&gt;-->
+<!--			<interceptor-ref name="defaultStack"></interceptor-ref>-->
+<!--			<result name="autorizado">sistema.jsp</result>-->
+<!--			<result name="negado">index.jsp</result>-->
+<!--		</action>-->
+
+		<action name="registeruser" class="org.example.controller.RegisterAction">
+			<result name="REGISTER">/register.jsp</result>
+		</action>
+
+		<action name="findall" class="org.example.controller.FindAllAction">
+			<result name="FINDALL">/findAll.jsp</result>
+		</action>
+
+		<action name="updatedetails" class="org.example.controller.UpdateAction">
+			<result name="UPDATE">/update.jsp</result>
+		</action>
+
+		<action name="deleterecord" class="org.example.controller.DeleteAction">
+			<result name="DELETE">/delete.jsp</result>
+		</action>
+
+	</package>
+</struts>
